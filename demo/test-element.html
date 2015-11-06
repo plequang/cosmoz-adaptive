@@ -1,0 +1,25 @@
+<link rel="import" href="../cosmoz-adaptive-element-behavior.html">
+<dom-module id="test-element">
+	<template>
+		<h2>
+			Hello
+		</h2>
+		<div>
+			Desktop: <span>{{view.desktop}}</span>
+		</div>
+		<div>
+			Tablet: <span>{{view.tablet}}</span>
+		</div>
+		<div>
+			Mobile: <span>{{view.mobile}}</span>
+		</div>
+	</template>
+	<script>
+		Polymer({
+			is: 'test-element',
+			behaviors: [
+				Cosmoz.AdaptiveElementBehavior
+			]
+		})
+	</script>
+</dom-module>

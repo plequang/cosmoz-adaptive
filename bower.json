@@ -1,0 +1,31 @@
+{
+  "name": "cosmoz-adaptive",
+  "main": [
+    "cosmoz-adaptive-container.html",
+    "cosmoz-adaptive-element-behavior"
+  ],
+  "version": "0.0.1",
+  "homepage": "https://github.com/plequang/cosmoz-adaptive",
+  "authors": [
+    "Neovici Development"
+  ],
+  "description": "Polymer cosmoz adaptive",
+  "keywords": [
+    "web-components",
+    "polymer",
+    "cosmoz"
+  ],
+  "license": "Apache 2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0",
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-media-query": "PolymerElements/iron-media-query#^1.0.0"
+  }
+}

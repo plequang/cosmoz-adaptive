@@ -1,0 +1,75 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-media-query/iron-media-query.html">
+
+<dom-module id="cosmoz-adaptive-container">
+	<template>
+		<iron-media-query query="[[desktopMediaQuery]]" query-matches="{{_desktopMediaQueryMatches}}"></iron-media-query>
+		<iron-media-query query="[[tabletMediaQuery]]" query-matches="{{_tabletMediaQueryMatches}}"></iron-media-query>
+		<iron-media-query query="[[mobileMediaQuery]]" query-matches="{{_mobileMediaQueryMatches}}"></iron-media-query>
+		<content></content>
+	</template>
+<script>
+/*global Polymer */
+"use strict";
+
+Polymer({
+	is: 'cosmoz-adaptive-container',
+	properties: {
+
+		desktopMediaQuery: {
+			type: String,
+			value: '(min-width: 600px)'
+		},
+		desktop: {
+			type: Boolean,
+			readOnly: true,
+			notify: true
+		},
+		tabletMediaQuery: {
+			type: String,
+			value: '(min-width: 481px)'
+		},
+		tablet: {
+			type: Boolean,
+			readOnly: true,
+			notify: true
+		},
+
+		mobileMediaQuery: {
+			type: String,
+			value: '(max-width: 480px) and (min-width: 0px)'
+		},
+		mobile: {
+			type: Boolean,
+			readOnly: true,
+			notify: true
+		}
+	},
+
+	listeners: {
+		'adaptive-element-attached': 'adaptiveElementAttached'
+	},
+
+	observers: [
+		'_mediaQueryResults(_desktopMediaQueryMatches, _tabletMediaQueryMatches, _mobileMediaQueryMatches)'
+	],
+
+	adaptiveElementAttached: function (event) {
+		event.detail.element.setContainer(this);
+		event.stopPropagation();
+	},
+
+	_mediaQueryResults: function (desktopMediaQueryMatches, tabletMediaQueryMatches, mobileMediaQueryMatches) {
+		if (desktopMediaQueryMatches !== this.desktop) {
+			this._setDesktop(desktopMediaQueryMatches);
+		}
+		if (tabletMediaQueryMatches !== this.tablet) {
+			this._setTablet(tabletMediaQueryMatches);
+		}
+		if (mobileMediaQueryMatches !== this.mobile) {
+			this._setMobile(mobileMediaQueryMatches);
+		}
+	}
+});
+</script>
+</dom-module>

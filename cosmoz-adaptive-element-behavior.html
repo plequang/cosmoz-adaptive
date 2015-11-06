@@ -1,0 +1,81 @@
+<link rel="import" href="../polymer/polymer.html">
+<script>
+"use strict";
+window.Cosmoz = window.Cosmoz || {};
+
+/*
+	See https://github.com/Polymer/polymer/issues/2224
+ */
+/*
+  @polymerBehavior
+*/
+Cosmoz.AdaptiveElementBehavior = {
+	_container: undefined,
+	properties: {
+
+		view: {
+			type: Object,
+			readOnly: true,
+			notify: true,
+			value: function () {
+				return {
+					desktop: undefined,
+					tablet: undefined,
+					mobile: undefined
+				};
+			}
+		}
+	},
+
+	attached: function () {
+		this.fire('adaptive-element-attached', {element: this}, {bubbles: true, cancelable: true});
+	},
+
+	detached: function () {
+		if (this._container) {
+			this._unlistenContainer(this._container);
+			this._container = undefined;
+		}
+	},
+
+	setContainer: function (container) {
+		if (this._container) {
+			this._unlistenContainer(this._container);
+		}
+		this._container = container;
+		this._listenContainer(this._container);
+
+		this.set('view.desktop', this._container.desktop);
+		this.set('view.tablet', this._container.tablet);
+		this.set('view.mobile', this._container.mobile);
+	},
+
+	_listenContainer: function (container) {
+		this.listen(container, 'desktop-changed', '_desktopChanged');
+		this.listen(container, 'tablet-changed', '_tabletChanged');
+		this.listen(container, 'mobile-changed', '_mobileChanged');
+	},
+
+	_unlistenContainer: function (container) {
+		this.unlisten(container, 'desktop-changed', '_desktopChanged');
+		this.unlisten(container, 'tablet-changed', '_tabletChanged');
+		this.unlisten(container, 'mobile-changed', '_mobileChanged');
+	},
+
+	_desktopChanged: function (event) {
+		this.set('view.desktop', event.detail.value);
+	},
+
+	_tabletChanged: function (event) {
+		this.set('view.tablet', event.detail.value);
+	},
+
+	_mobileChanged: function (event) {
+		this.set('view.mobile', event.detail.value);
+	}
+
+
+
+};
+</script>
+

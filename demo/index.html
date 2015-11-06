@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+		<title>cosmoz-page-router Demo</title>
+		<script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+		<link rel="import" href="../cosmoz-adaptive-container.html">
+		<link rel="import" href="test-element.html">
+	</head>
+	<body>
+
+		<cosmoz-adaptive-container
+			desktop-media-query="(min-width: 768px)"
+			mobile-media-query="(max-width: 480px) and (min-width: 0px)"
+			tablet-media-query="(min-width: 481px)">
+			<test-element></test-element>
+
+			<!-- nesting a container with different values -->
+			<div style="margin:50px">
+				<cosmoz-adaptive-container
+					desktop-media-query="(min-width: 800px)">
+					<test-element></test-element>
+				</cosmoz-adaptive-container>
+			</div>
+		</cosmoz-adaptive-container>
+	</body>
+</html>
